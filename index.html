@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#e9e8e3">
+  <meta name="description" content="Nortway is an independent creative studio building distinctive websites, visual identities, and motion-led digital experiences.">
+  <meta property="og:title" content="Nortway — Independent Creative Studio">
+  <meta property="og:description" content="Digital presence, identity, and motion with a point of view.">
+  <meta property="og:type" content="website">
+  <title>Nortway® — Independent Creative Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#e9e8e3;
+      --paper-2:#deddd7;
+      --ink:#171717;
+      --muted:#777771;
+      --line:rgba(23,23,23,.18);
+      --silver:#b9bab8;--silver-light:#f7f7f4;
+      --dark:#171817;--radius:22px;
+      --mono:"DM Mono",monospace;
+      --sans:"Manrope",Arial,sans-serif;
+      --ease:cubic-bezier(.2,.75,.25,1);
+    }
+
+    *{box-sizing:
+      border-box}
+
+    html{
+      scroll-behavior:smooth;
+      scroll-padding-top:90px;
+    }
+
+    body{
+      margin:0;
+      background:var(--paper);
+      color:var(--ink);
+      font-family:var(--sans);
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+    button{
+      font:inherit;
+    }
+    ::selection{
+      background:#222;
+      color:#eee;
+    }
+    .grain{
+      position:fixed;
+      inset:0;
+      z-index:20;
+      pointer-events:none;
+      opacity:.12;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      mix-blend-mode:multiply;
+    }
+    .wrap{
+      width:min(1400px,calc(100% - 80px));
+      margin:auto
+    }
+    .mono{
+      font-family:var(--mono);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:10px;
+    }
+    .topline{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 0;
+      border-bottom:1px solid var(--line);
+      color:#55554f;
+    }
+    .topline .status{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+    .dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#777;
+      box-shadow:0 0 0 4px rgba(0,0,0,.06)
+    }
+    header{
+      position:sticky;
+      top:0;
+      z-index:15;
+      background:rgba(233,232,227,.76);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid transparent;
+      transition:.3s;
+    }
+    header.scrolled{
+      border-color:var(--line);
+      box-shadow:0 8px 30px rgba(0,0,0,.04);
+    }
+    .nav{
+      height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .wordmark{
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:-1.5px;
+    }
+    .wordmark sup{
+      font:9px var(--mono);
+      vertical-align:top;
+      margin-left:3px;
+    }
+    .navlinks{
+      display:flex;
+      align-items:center;
+      gap:34px;
+    }
+    .navlinks a{
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.04em;
+      transition:opacity .2s;
+    }
+    .navlinks a:hover{
+      opacity:.5;
+    }
+    .nav-cta{
+      border:1px solid var(--ink);
+      padding:12px 17px;
+      border-radius:99px;
+      font:10px var(--mono);
+      letter-spacing:.06em;
+      transition:.25s;
+    }
+    .nav-cta:hover{
+      background:var(--ink);
+      color:var(--paper);
+    }
+    .menu-btn{
+      display:none;
+      background:none;
+      border:0;
+      padding:10px;
+      cursor:pointer;
+    }
+    .menu-btn span{
+      display:block;
+      width:23px;
+      height:1px;
+      background:var(--ink);
+      margin:6px;
+      transition:.25s;
+    }
+    
+    .hero{
+      min-height:calc(100svh - 112px);
+      position:relative;
+      display:flex;
+      align-items:center;
+      overflow:hidden;
+      padding:55px 0 70px;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      width:min(64vw,850px);
+      aspect-ratio:1;
+      left:50%;
+      top:48%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(255,255,255,.82) 0,rgba(205,205,201,.35) 34%,rgba(233,232,227,0) 69%);
+      filter:blur(8px);
+    }
+    .hero-meta{
+      position:absolute;
+      top:38px;
+      left:0;
+      right:0;
+      display:flex;
+      justify-content:space-between;
+      color:#66665f;
+    }
+    .hero-copy{
+      position:relative;
+      z-index:2;
+      width:100%;
+      text-align:center;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;color:#55554f;
+      margin-bottom:16px;
+    }
+    .eyebrow:before,.eyebrow:after{
+      content:"";
+      height:1px;
+      width:30px;
+      background:#888;}
+    .hero h1{
+      font-size:clamp(76px,15.5vw,225px);
+      line-height:.77;
+      letter-spacing:-.105em;
+      font-weight:800;
+      margin:0;
+      position:relative;
+      z-index:3;
+    }
+    .hero h1 span{
+      display:block;
+    }
+    .hero h1 .second{
+      padding-right:.08em;
+    }
+    .sculpture{
+      position:absolute;
+      z-index:1;
+      left:50%;
+      top:47%;
+      width:min(48vw,590px);
+      height:min(33vw,390px);
+      min-width:300px;
+      min-height:220px;
+      transform:translate(-50%,-50%) rotate(-13deg);
+      pointer-events:none;
+      filter:drop-shadow(28px 38px 22px rgba(0,0,0,.22));
+      animation:float 7s ease-in-out infinite;
+    }
+    .sculpture .body{
+      position:absolute;
+      inset:15% 4% 12%;
+      border-radius:48% 52% 43% 57% / 45% 43% 57% 55%;
+      transform:rotate(-9deg);
+      background:linear-gradient(145deg,#fff 0%,#bfc0bd 13%,#f6f6f3 22%,#777a79 34%,#d9dad7 46%,#777a79 59%,#f5f5f1 72%,#8d908f 86%,#e5e6e2 100%);
+      box-shadow:inset 12px 12px 20px rgba(255,255,255,.8),inset -18px -22px 28px rgba(0,0,0,.3);
+    }
+    .sculpture .body:after{
+      content:"";
+      position:absolute;
+      inset:12% 8%;
+      border-radius:inherit;
+      border-top:2px solid rgba(255,255,255,.8);
+      border-bottom:2px solid rgba(0,0,0,.17);
+      filter:blur(1px);
+    }
+    .sculpture .loop{
+      position:absolute;
+      width:35%;
+      height:75%;
+      left:35%;
+      top:-3%;
+      border:34px solid transparent;border-left-color:#f4f4f1;border-top-color:#c6c8c5;border-right-color:#686c6b;
+      border-bottom-color:#aeb0ad;
+      border-radius:50%;
+      transform:rotate(35deg);
+      filter:drop-shadow(5px 7px 5px rgba(0,0,0,.24));
+    }
+    .sculpture .tip{
+      position:absolute;
+      width:16%;
+      height:13%;
+      left:6%;
+      top:25%;
+      border-radius:70% 20% 50% 50%;
+      background:linear-gradient(130deg,#f6f6f2,#777b79 65%,#e4e5e1);
+      transform:rotate(20deg);
+    }
+    .hero-sub{
+      position:relative;
+      z-index:4;
+      margin:34px auto 0;
+      max-width:520px;
+      font-size:14px;
+      line-height:1.8;
+      color:#50504b;
+    }
+    .hero-sub strong{
+      display:block;
+      font:11px var(--mono);
+      letter-spacing:.14em;margin-bottom:10px;
+      color:var(--ink);
+    }
+    .hero-actions{display:flex;justify-content:center;gap:12px;margin-top:27px;position:relative;z-index:4}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:18px;padding:16px 22px;border-radius:100px;font:10px var(--mono);letter-spacing:.07em;border:1px solid var(--ink);transition:transform .25s var(--ease),background .25s,color .25s,box-shadow .25s}
+    .btn:hover{transform:translateY(-4px)}
+    .btn.dark{background:var(--ink);color:var(--paper)}
+    .btn.dark:hover{box-shadow:0 12px 28px rgba(0,0,0,.18)}
+    .btn.light:hover{background:var(--ink);color:var(--paper)}
+    .hero-index{position:absolute;bottom:28px;left:0;right:0;display:flex;justify-content:space-between;color:#77776f}
+    .hero-index .scroll{display:flex;align-items:center;gap:10px}
+    .scroll i{display:block;width:42px;height:1px;background:#888}
+    @keyframes float{0%,100%{transform:translate(-50%,-50%) rotate(-13deg) translateY(0)}50%{transform:translate(-50%,-53%) rotate(-8deg) translateY(-12px)}}
+    section{padding:120px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:55px}
+    .kicker{color:#77776f;margin-bottom:16px}
+    h2{font-size:clamp(42px,7vw,92px);line-height:.91;letter-spacing:-.085em;margin:0;font-weight:800}
+    .section-intro{max-width:330px;color:#62625c;font-size:13px;line-height:1.8;margin:0 0 4px}
+    .about{background:#dedd d7;background:var(--paper-2)}
+    .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:8vw;align-items:start}
+    .about-statement{font-size:clamp(28px,4vw,54px);line-height:1.12;letter-spacing:-.065em;font-weight:700;max-width:720px}
+    .about-statement em{font-style:normal;color:#85857e}
+    .about-copy{font-size:14px;line-height:1.9;color:#5e5e58;max-width:450px;margin-top:12px}
+    .capabilities{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:80px}
+    .cap-card{border:1px solid var(--line);border-radius:var(--radius);padding:27px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between;transition:.3s var(--ease);background:rgba(255,255,255,.14)}
+    .cap-card:hover{transform:translateY(-7px);background:rgba(255,255,255,.38);box-shadow:0 18px 35px rgba(0,0,0,.06)}
+    .cap-icon{width:43px;height:43px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:19px}
+    .cap-card h3{font-size:21px;letter-spacing:-.06em;margin:25px 0 8px}
+    .cap-card p{font-size:12px;line-height:1.7;color:#66665f;margin:0;max-width:280px}
+    .work{background:var(--dark);color:var(--paper)}
+    .work .kicker,.work .section-intro{color:#999a94}
+    .work .section-intro{max-width:290px}
+    .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .project{min-width:0}
+    .project-visual{height:390px;border:1px solid rgba(255,255,255,.17);border-radius:18px;position:relative;overflow:hidden;background:linear-gradient(145deg,#252725,#111211);display:grid;place-items:center;transition:.35s}
+    .project:nth-child(2) .project-visual{background:linear-gradient(145deg,#d5d4ce,#aaa9a3);color:#171717}
+    .project:nth-child(3) .project-visual{background:linear-gradient(145deg,#454744,#222421)}
+    .project-visual:before{content:"";position:absolute;width:65%;aspect-ratio:1;border-radius:50%;border:1px solid currentColor;opacity:.2}
+    .project-visual:after{content:"";position:absolute;width:42%;height:65%;border:1px solid currentColor;opacity:.25;transform:rotate(35deg);border-radius:48%}
+    .project-placeholder{position:relative;z-index:1;text-align:center}
+    .project-placeholder b{font-size:clamp(32px,4vw,58px);letter-spacing:-.09em;display:block}
+    .project-placeholder span{font:9px var(--mono);letter-spacing:.14em;opacity:.65}
+    .project:hover .project-visual{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.24)}
+    .project-info{display:flex;justify-content:space-between;gap:10px;padding:17px 3px;color:#c6c7c1}
+    .project-info strong{font-size:13px}
+    .project-info span{font:9px var(--mono);color:#888a84;text-align:right}
+    .work-note{margin-top:35px;font:10px var(--mono);color:#8e908a;letter-spacing:.06em}
+    .approach{background:var(--paper)}
+    .approach-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+    .approach-item{padding:25px 22px 20px 0;border-bottom:1px solid var(--line);position:relative}
+    .approach-item:not(:last-child){border-right:1px solid var(--line);margin-right:22px}
+    .approach-item .num{font:10px var(--mono);color:#85857e}
+    .approach-item h3{font-size:20px;letter-spacing:-.06em;margin:46px 0 10px}
+    .approach-item p{font-size:12px;line-height:1.8;color:#6d6d66;max-width:220px;margin:0}
+    .manifesto{padding:100px 0;background:var(--paper-2);text-align:center;position:relative;overflow:hidden}
+    .manifesto:before{content:"";position:absolute;width:440px;height:440px;border-radius:50%;border:1px solid rgba(0,0,0,.08);left:50%;top:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 45px rgba(0,0,0,.015),0 0 0 90px rgba(0,0,0,.012)}
+    .manifesto h2{position:relative;font-size:clamp(42px,8.8vw,112px);max-width:1100px;margin:auto}
+    .manifesto p{position:relative;font:10px var(--mono);letter-spacing:.13em;color:#6e6e67;margin:28px 0 0}
+    .contact{background:var(--dark);color:var(--paper);padding-bottom:70px}
+    .contact .kicker{color:#9a9b95}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end}
+    .contact h2{font-size:clamp(48px,8vw,108px)}
+    .contact-side{display:flex;flex-direction:column;align-items:flex-start;gap:24px;padding-bottom:8px}
+    .contact-side p{color:#a5a69f;font-size:13px;line-height:1.8;max-width:370px;margin:0}
+    .contact-link{font-size:clamp(18px,2.5vw,27px);letter-spacing:-.05em;border-bottom:1px solid #777;padding-bottom:9px}
+    footer{background:var(--dark);color:#8e9089}
+    .footer-top{border-top:1px solid rgba(255,255,255,.16);padding:25px 0;display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .footer-brand{font-size:20px;font-weight:800;letter-spacing:-1px;color:var(--paper)}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding:17px 0 25px;display:flex;justify-content:space-between;gap:20px;font:9px var(--mono);letter-spacing:.05em}
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .cursor-glow{position:fixed;width:250px;height:250px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(255,255,255,.22),transparent 68%);transform:translate(-50%,-50%);opacity:0;transition:opacity .3s}
+    @media(hover:hover){body:hover .cursor-glow{opacity:1}}
+    @media(max-width:900px){
+      .wrap{width:min(100% - 48px,720px)}.navlinks{gap:18px}.navlinks a{font-size:10px}
+      .hero{min-height:780px}.hero h1{font-size:17vw}.sculpture{width:65vw;height:43vw;top:43%}
+      .about-grid{grid-template-columns:1fr;gap:20px}.capabilities{margin-top:50px}
+      .project-visual{height:300px}.approach-grid{grid-template-columns:repeat(2,1fr)}
+      .approach-item:nth-child(2){border-right:0;margin-right:0}.approach-item:nth-child(3){border-right:1px solid var(--line)}
+      .section-head{align-items:flex-start;flex-direction:column;margin-bottom:40px}
+    }
+    @media(max-width:640px){
+      .wrap{width:calc(100% - 36px)}.topline{font-size:8px}.nav{height:65px}.wordmark{font-size:20px}
+      .menu-btn{display:block;z-index:2}.navlinks{position:absolute;left:0;right:0;top:64px;background:rgba(233,232,227,.97);backdrop-filter:blur(18px);padding:0 22px;display:flex;flex-direction:column;align-items:stretch;gap:0;max-height:0;overflow:hidden;transition:max-height .35s,padding .35s;border-bottom:1px solid transparent}
+      .navlinks.open{max-height:420px;padding:10px 22px 22px;border-color:var(--line)}
+      .navlinks a{padding:14px 0;border-bottom:1px solid var(--line);font-size:11px}.navlinks .nav-cta{margin-top:14px;text-align:center;border:1px solid var(--ink);padding:14px}
+      .menu-btn.active span:first-child{transform:translateY(3.5px) rotate(45deg)}.menu-btn.active span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+      .hero{min-height:720px;padding:70px 0 80px}.hero-meta{top:22px;font-size:8px}.hero h1{font-size:18vw;line-height:.83;letter-spacing:-.1em}
+      .sculpture{width:88vw;height:58vw;min-width:0;min-height:0;top:42%}.sculpture .loop{border-width:21px}
+      .hero-sub{font-size:12px;max-width:310px;margin-top:30px}.hero-actions{flex-direction:column;align-items:center}.btn{width:min(100%,260px)}
+      .hero-index{font-size:8px;bottom:20px}.hero-index .right{display:none}
+      section{padding:85px 0}.section-head{gap:20px}.section-intro{font-size:12px}
+      .capabilities{grid-template-columns:1fr;gap:9px;margin-top:38px}.cap-card{min-height:185px;padding:22px}
+      .work-grid{grid-template-columns:1fr;gap:28px}.project-visual{height:320px}
+      .approach-grid{grid-template-columns:1fr}.approach-item,.approach-item:not(:last-child){border-right:0;margin:0;padding:22px 0}
+      .approach-item h3{margin:24px 0 8px}.manifesto{padding:85px 0}.manifesto:before{width:290px;height:290px}
+      .contact-grid{grid-template-columns:1fr;gap:28px}.contact-side{padding:0}
+      .footer-top,.footer-bottom{align-items:flex-start;flex-direction:column}.footer-bottom{gap:10px}
+    }
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div><div class="cursor-glow" aria-hidden="true"></div>
+  <div class="wrap topline mono"><span>INDEPENDENT CREATIVE STUDIO</span><span class="status"><i class="dot"></i> AVAILABLE FOR SELECT PROJECTS</span><span>EST. 2026 — WORLDWIDE</span></div>
+  <header id="header">
+    <div class="wrap nav">
+      <a class="wordmark" href="#home" aria-label="Nortway home">NORTWAY<sup>®</sup></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span></button>
+      <nav class="navlinks" id="navLinks" aria-label="Main navigation">
+        <a href="#about">STUDIO</a><a href="#work">SELECTED WORK</a><a href="#approach">APPROACH</a><a href="#contact">CONTACT</a>
+        <a class="nav-cta" href="mailto:hello@nortway.studio?subject=Project%20inquiry">START A PROJECT ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="home">
+      <div class="hero-meta mono"><span>( ALL CAPS — CREATIVE DIRECTION )</span><span>DESIGN / DIGITAL / MOTION</span></div>
+      <div class="hero-copy">
+        <div class="eyebrow mono">INTRODUCING NORTWAY®</div>
+        <div class="sculpture" aria-hidden="true"><div class="body"></div><div class="loop"></div><div class="tip"></div></div>
+        <h1 aria-label="Make it distinct"><span>MAKE IT</span><span class="second">DISTINCT.</span></h1>
+        <p class="hero-sub"><strong>INDEPENDENT BY DESIGN. DISTINCT BY NATURE.</strong>We shape digital presence through thoughtful websites, visual identities, and motion that makes people look twice.</p>
+        <div class="hero-actions"><a class="btn dark" href="#contact">LET'S MAKE SOMETHING <span>↗</span></a><a class="btn light" href="#work">EXPLORE THE WORK <span>↓</span></a></div>
+      </div>
+      <div class="hero-index mono"><span>01 — 03 / CREATIVE PRACTICE</span><span class="scroll"><i></i> SCROLL TO EXPLORE</span><span class="right">DESIGNED WITH INTENTION.</span></div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="wrap">
+        <div class="section-head reveal"><div><div class="kicker mono">01 / THE STUDIO</div><h2>Small by choice.<br>Sharp by design.</h2></div><p class="section-intro">A focused creative practice for brands that want to be remembered — not just seen.</p></div>
+        <div class="about-grid reveal">
+          <div class="about-statement">Nortway is an independent, one-person creative studio building <em>bold digital experiences</em> with clarity, character, and purpose.</div>
+          <div class="about-copy">No layers of account managers. No oversized process. Just one creative mind working closely with you, from the first idea to the final detail. Strategy, design, and execution stay connected — making the work more personal, agile, and consistent.<br><br>Based in the digital world. Working with ambitious people and businesses everywhere.</div>
+        </div>
+        <div class="capabilities">
+          <article class="cap-card reveal"><div class="cap-icon">↗</div><div><h3>Websites & Digital</h3><p>Distinctive, responsive websites designed to turn a first impression into a lasting one. Built with performance and detail in mind.</p></div></article>
+          <article class="cap-card reveal"><div class="cap-icon">◉</div><div><h3>Visual Identity</h3><p>Art direction and visual systems that give a brand a recognizable voice — from the big idea to the smallest graphic detail.</p></div></article>
+          <article class="cap-card reveal"><div class="cap-icon">✳</div><div><h3>Video & Motion</h3><p>Rhythm, movement, and visual storytelling for campaigns, social content, and digital experiences that hold attention.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="work" id="work">
+      <div class="wrap">
+        <div class="section-head reveal"><div><div class="kicker mono">02 / SELECTED WORK</div><h2>Made to<br>make a mark.</h2></div><p class="section-intro">A selection of work in progress. Three spaces reserved for projects that deserve the spotlight.</p></div>
+        <div class="work-grid">
+          <article class="project reveal"><a href="#contact" aria-label="Project one placeholder"><div class="project-visual"><div class="project-placeholder"><b>01</b><span>PROJECT PREVIEW</span></div></div><div class="project-info"><strong>Project One</strong><span>WEB / IDENTITY</span></div></a></article>
+          <article class="project reveal"><a href="#contact" aria-label="Project two placeholder"><div class="project-visual"><div class="project-placeholder"><b>02</b><span>PROJECT PREVIEW</span></div></div><div class="project-info"><strong>Project Two</strong><span>ART DIRECTION</span></div></a></article>
+          <article class="project reveal"><a href="#contact" aria-label="Project three placeholder"><div class="project-visual"><div class="project-placeholder"><b>03</b><span>PROJECT PREVIEW</span></div></div><div class="project-info"><strong>Project Three</strong><span>MOTION / DIGITAL</span></div></a></article>
+        </div>
+        <p class="work-note">* CASE STUDIES WILL BE ADDED SOON — THIS SPACE IS INTENTIONALLY OPEN.</p>
+      </div>
+    </section>
+
+    <section class="approach" id="approach">
+      <div class="wrap">
+        <div class="section-head reveal"><div><div class="kicker mono">03 / THE APPROACH</div><h2>Less noise.<br>More meaning.</h2></div><p class="section-intro">A clear, collaborative process that keeps the focus where it belongs: on making something exceptional.</p></div>
+        <div class="approach-grid">
+          <article class="approach-item reveal"><span class="num">01 / DISCOVER</span><h3>Understand first.</h3><p>We get to the heart of your goals, audience, and what makes your idea different.</p></article>
+          <article class="approach-item reveal"><span class="num">02 / DEFINE</span><h3>Find the angle.</h3><p>We shape a clear creative direction and a visual language with a reason to exist.</p></article>
+          <article class="approach-item reveal"><span class="num">03 / CREATE</span><h3>Make it real.</h3><p>Design and development come together through focused craft and considered details.</p></article>
+          <article class="approach-item reveal"><span class="num">04 / REFINE</span><h3>Make it matter.</h3><p>We polish, test, and prepare the final experience to meet the real world.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="manifesto">
+      <div class="wrap reveal"><div class="kicker mono">A NOTE ON GOOD WORK</div><h2>GOOD DESIGN<br>DOESN'T ASK<br>FOR ATTENTION.<br><span style="color:#85857e">IT EARNS IT.</span></h2><p>CLARITY IS A CREATIVE ADVANTAGE. DETAIL IS THE DIFFERENCE.</p></div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <div class="section-head reveal"><div><div class="kicker mono">04 / GET IN TOUCH</div><h2>Have a good<br>one in mind?</h2></div></div>
+        <div class="contact-grid reveal">
+          <div class="contact-side"><p>Have a project, a question, or an idea that needs a visual point of view? Tell me a little about it. I’d love to hear what you're building.</p><a class="contact-link" href="mailto:hello@nortway.studio?subject=Let's%20talk%20about%20a%20project">hello@nortway.studio ↗</a><a class="btn light" href="mailto:hello@nortway.studio?subject=Project%20inquiry">START A CONVERSATION ↗</a></div>
+          <div class="contact-side"><span class="mono" style="color:#888a84">NORTWAY® — INDEPENDENT CREATIVE STUDIO</span><p>One person. A connected creative practice. A direct line from your first message to the finished work.</p><span class="mono" style="color:#888a84">AVAILABLE WORLDWIDE · WORKING REMOTELY</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-top"><a class="footer-brand" href="#home">NORTWAY<sup>®</sup></a><span class="mono">INDEPENDENT CREATIVE STUDIO</span><a class="mono" href="#home">BACK TO TOP ↑</a></div>
+    <div class="wrap footer-bottom"><span>© <span id="year">2026</span> NORTWAY. ALL RIGHTS RESERVED.</span><span>DESIGNED WITH INTENTION.</span><span>WEB · IDENTITY · MOTION</span></div>
+  </footer>
+  <script>
+    // Nortway — lightweight interactions, no framework required.
+    const $ = (selector, scope = document) => scope.querySelector(selector);
+    const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+
+    function initMenu(){
+      const button = $('#menuBtn'), nav = $('#navLinks');
+      button.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        button.classList.toggle('active', isOpen);
+        button.setAttribute('aria-expanded', String(isOpen));
+        button.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      });
+      $$('#navLinks a').forEach(link => link.addEventListener('click', () => {
+        nav.classList.remove('open'); button.classList.remove('active');
+        button.setAttribute('aria-expanded','false');
+      }));
+    }
+    function initScrollEffects(){
+      const header = $('#header');
+      const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 24);
+      onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+      const items = $$('.reveal');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+          if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}
+        }), {threshold:.12});
+        items.forEach(item => observer.observe(item));
+      } else items.forEach(item => item.classList.add('visible'));
+    }
+    function initCursorGlow(){
+      const glow = $('.cursor-glow');
+      window.addEventListener('pointermove', e => {
+        glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px';
+      }, {passive:true});
+    }
+    function initYear(){ $('#year').textContent = new Date().getFullYear(); }
+    document.addEventListener('DOMContentLoaded', () => {
+      initMenu(); initScrollEffects(); initCursorGlow(); initYear();
+    });
+  </script>
+</body>
+</html>
